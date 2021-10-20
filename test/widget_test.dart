@@ -6,7 +6,7 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram_feed_ui_redesign/main.dart';
+import 'package:even_better/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

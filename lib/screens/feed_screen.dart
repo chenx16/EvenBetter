@@ -1,9 +1,10 @@
+import 'package:even_better/screens/profile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_instagram_feed_ui_redesign/models/post_model.dart';
-import 'package:flutter_instagram_feed_ui_redesign/screens/addpost.dart';
-import 'package:flutter_instagram_feed_ui_redesign/screens/api.dart';
+import 'package:even_better/models/post_model.dart';
+import 'package:even_better/screens/addpost.dart';
+import 'package:even_better/screens/api.dart';
 //import 'package:flutter_instagram_feed_ui_redesign/screens/postpage.dart';
-import 'package:flutter_instagram_feed_ui_redesign/screens/view_post_screen.dart';
+import 'package:even_better/screens/view_post_screen.dart';
 
 class FeedScreen extends StatefulWidget {
   @override
@@ -258,10 +259,26 @@ class _FeedScreenState extends State<FeedScreen> {
               title: Text(''),
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person_outline,
-                size: 30.0,
-                color: Colors.grey,
+              icon: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+                child: FlatButton(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  color: Colors.white,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileApp().build(context)));
+                  },
+                  child: Icon(
+                    Icons.person_outline,
+                    size: 30.0,
+                    color: Colors.grey,
+                  ),
+                ),
               ),
               title: Text(''),
             ),
