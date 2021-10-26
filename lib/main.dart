@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:even_better/screens/feed_screen.dart';
+import 'package:even_better/post/feed_screen.dart';
 
 void main() => runApp(MyApp());
 

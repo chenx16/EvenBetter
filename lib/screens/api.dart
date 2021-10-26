@@ -20,10 +20,9 @@ Future<http.Response> _createPost(title, description, url, likes) {
     },
     body: jsonEncode(<String, String>{
       "_id": "0000000000001",
-      "title": "test",
-      "description": "",
-      "picture-uri":
-          "https://c8.alamy.com/comp/E47RKX/china-great-wall-chang-cheng-E47RKX.jpg",
+      "title": title,
+      "description": description,
+      "picture-uri": url,
       "likes": 0.toString(),
       "__v": 0.toString()
     }),
