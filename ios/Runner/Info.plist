@@ -42,8 +42,10 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To choose a photo</string>
+	<string>Allow access to photo library</string>
 	<key>NSCameraUsageDescription</key>
-	<string>To take a photo</string>
+	<string>Allow access to camera to capture photos</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow access to microphone</string>
 </dict>
 </plist>

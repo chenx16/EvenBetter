@@ -1,20 +1,23 @@
 import 'package:even_better/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:even_better/models/post_model.dart';
-import 'package:even_better/screens/addpost.dart';
-import 'package:even_better/screens/api.dart';
+import 'package:even_better/post/addpost.dart';
 //import 'package:flutter_instagram_feed_ui_redesign/screens/postpage.dart';
 import 'package:even_better/post/view_post_screen.dart';
 
 class FeedScreen extends StatefulWidget {
+  const FeedScreen({Key key}) : super(key: key);
+
   @override
   _FeedScreenState createState() => _FeedScreenState();
 }
 
 class _FeedScreenState extends State<FeedScreen> {
+  bool _hasBeenPressed = false;
+
   Widget _buildPost(int index) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: Container(
         width: double.infinity,
         height: 560.0,
@@ -25,14 +28,14 @@ class _FeedScreenState extends State<FeedScreen> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0),
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Column(
                 children: <Widget>[
                   ListTile(
                     leading: Container(
                       width: 50.0,
                       height: 50.0,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
@@ -55,13 +58,13 @@ class _FeedScreenState extends State<FeedScreen> {
                     ),
                     title: Text(
                       posts[index].authorName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     subtitle: Text(posts[index].timeAgo),
                     trailing: IconButton(
-                      icon: Icon(Icons.more_horiz),
+                      icon: const Icon(Icons.more_horiz),
                       color: Colors.black,
                       onPressed: () => print('More'),
                     ),
@@ -79,12 +82,12 @@ class _FeedScreenState extends State<FeedScreen> {
                       );
                     },
                     child: Container(
-                      margin: EdgeInsets.all(10.0),
+                      margin: const EdgeInsets.all(10.0),
                       width: double.infinity,
                       height: 400.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             color: Colors.black45,
                             offset: Offset(0, 5),
@@ -99,7 +102,7 @@ class _FeedScreenState extends State<FeedScreen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -108,11 +111,11 @@ class _FeedScreenState extends State<FeedScreen> {
                             Row(
                               children: <Widget>[
                                 IconButton(
-                                  icon: Icon(Icons.favorite_border),
+                                  icon: const Icon(Icons.favorite_border),
                                   iconSize: 30.0,
                                   onPressed: () => print('Like post'),
                                 ),
-                                Text(
+                                const Text(
                                   '2,515',
                                   style: TextStyle(
                                     fontSize: 14.0,
@@ -121,11 +124,11 @@ class _FeedScreenState extends State<FeedScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(width: 20.0),
+                            const SizedBox(width: 20.0),
                             Row(
                               children: <Widget>[
                                 IconButton(
-                                  icon: Icon(Icons.chat),
+                                  icon: const Icon(Icons.chat),
                                   iconSize: 30.0,
                                   onPressed: () {
                                     Navigator.push(
@@ -138,7 +141,7 @@ class _FeedScreenState extends State<FeedScreen> {
                                     );
                                   },
                                 ),
-                                Text(
+                                const Text(
                                   '350',
                                   style: TextStyle(
                                     fontSize: 14.0,
@@ -161,129 +164,136 @@ class _FeedScreenState extends State<FeedScreen> {
     );
   }
 
+  int _index = 0;
   @override
   Widget build(BuildContext context) {
+    Widget child = Container();
+
+    switch (_index) {
+      case 0:
+        child = _postHome();
+        break;
+
+      case 4:
+        child = ProfileApp();
+        break;
+    }
     return Scaffold(
-      backgroundColor: Color(0xFFEDF0F6),
-      body: ListView(
-        physics: AlwaysScrollableScrollPhysics(),
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  'Even Better',
-                  style: TextStyle(
-                    fontFamily: 'Billabong',
-                    fontSize: 35.0,
-                    color: Color(0xFFF48FB1),
-                  ),
-                ),
-                Row(
-                  children: <Widget>[
-                    SizedBox(width: 16.0),
-                    Container(
-                      width: 35.0,
-                      child: IconButton(
-                        icon: Icon(Icons.send),
-                        iconSize: 30.0,
-                        onPressed: () => print('Direct Messages'),
-                      ),
-                    )
-                  ],
-                )
-              ],
+      backgroundColor: const Color(0xFFEDF0F6),
+      bottomNavigationBar: _bottomTab(),
+      body: SizedBox.expand(child: child),
+    );
+  }
+
+  Widget _bottomTab() {
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(30.0),
+        topRight: Radius.circular(30.0),
+      ),
+      child: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _index,
+        onTap: (int index) => setState(() => _index = index),
+        //backgroundColor: Colors.deepPurple,
+        items: [
+          const BottomNavigationBarItem(
+            icon: Icon(
+              Icons.dashboard,
+              size: 30.0,
+              color: Colors.grey,
             ),
+            title: Text(''),
           ),
-          _buildPost(0),
-          _buildPost(1),
+          const BottomNavigationBarItem(
+            icon: Icon(
+              Icons.search,
+              size: 30.0,
+              color: Colors.grey,
+            ),
+            title: Text(''),
+          ),
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+              child: FlatButton(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                color: Color(0xFFF8BBD0),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ImageFromGalleryEx()));
+                },
+                child: const Icon(
+                  Icons.add,
+                  size: 35.0,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            title: Text(''),
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(
+              Icons.favorite_border,
+              size: 30.0,
+              color: Colors.grey,
+            ),
+            title: Text(''),
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person_outline,
+              size: 30.0,
+              color: Colors.grey,
+            ),
+            title: Text(''),
+          ),
         ],
       ),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30.0),
-          topRight: Radius.circular(30.0),
-        ),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.dashboard,
-                size: 30.0,
-                color: Colors.black,
-              ),
-              title: Text(''),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.search,
-                size: 30.0,
-                color: Colors.grey,
-              ),
-              title: Text(''),
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
-                child: FlatButton(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  color: Color(0xFFF8BBD0),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ImageFromGalleryEx()));
-                  },
-                  child: Icon(
-                    Icons.add,
-                    size: 35.0,
-                    color: Colors.white,
-                  ),
+    );
+  }
+
+  Widget _postHome() {
+    return ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              const Text(
+                'Even Better',
+                style: TextStyle(
+                  fontFamily: 'Billabong',
+                  fontSize: 35.0,
+                  color: Color(0xFFF48FB1),
                 ),
               ),
-              title: Text(''),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.favorite_border,
-                size: 30.0,
-                color: Colors.grey,
-              ),
-              title: Text(''),
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
-                child: FlatButton(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  color: Colors.white,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfileApp().build(context)));
-                  },
-                  child: Icon(
-                    Icons.person_outline,
-                    size: 30.0,
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
-              title: Text(''),
-            ),
-          ],
+              Row(
+                children: <Widget>[
+                  const SizedBox(width: 16.0),
+                  SizedBox(
+                    width: 35.0,
+                    child: IconButton(
+                      icon: const Icon(Icons.send),
+                      iconSize: 30.0,
+                      onPressed: () => print('Direct Messages'),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
-      ),
+        _buildPost(0),
+        _buildPost(1),
+      ],
     );
   }
 }

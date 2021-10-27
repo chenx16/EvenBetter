@@ -6,6 +6,8 @@ import 'package:image_picker/image_picker.dart';
 class ImageFromGalleryEx extends StatefulWidget {
   @override
   ImageFromGalleryExState createState() => ImageFromGalleryExState();
+
+  build(BuildContext context) {}
 }
 
 class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
@@ -35,18 +37,18 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
         builder: (BuildContext bc) {
           return SafeArea(
             child: Container(
-              child: new Wrap(
+              child: Wrap(
                 children: <Widget>[
-                  new ListTile(
-                      leading: new Icon(Icons.photo_library),
-                      title: new Text('Photo Library'),
+                  ListTile(
+                      leading: const Icon(Icons.photo_library),
+                      title: const Text('Photo Library'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
                       }),
-                  new ListTile(
-                    leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
+                  ListTile(
+                    leading: const Icon(Icons.photo_camera),
+                    title: const Text('Camera'),
                     onTap: () {
                       _imgFromCamera();
                       Navigator.of(context).pop();
@@ -88,11 +90,11 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
           style: TextStyle(
             fontFamily: 'Billabong',
             fontSize: 35.0,
-            color: Colors.white,
+            color: Color(0xFFF48FB1),
           ),
         ),
         //<Widget>[]
-        backgroundColor: Colors.pinkAccent[100],
+        backgroundColor: Colors.grey[200],
         elevation: 50.0,
         //IconButton
         brightness: Brightness.dark,
@@ -113,12 +115,12 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
                   backgroundColor: Colors.white,
                   child: _image != null
                       ? ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(50),
                           child: Image.file(
                             _image,
                             width: 500,
                             height: 500,
-                            fit: BoxFit.fitHeight,
+                            fit: BoxFit.cover,
                           ),
                         )
                       //   child: _image != null
@@ -126,11 +128,32 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
                       //       : Text('Please select an image'),
                       // )
                       : Container(
+                          margin: const EdgeInsets.only(
+                              left: 10, top: 10, right: 10, bottom: 10),
+                          height: double.infinity,
+                          width: double.infinity,
                           decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(20)),
-                          width: 500,
-                          height: 500,
+                            color: Colors.grey[200],
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(50),
+                                topRight: Radius.circular(50),
+                                bottomLeft: Radius.circular(50),
+                                bottomRight: Radius.circular(50)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          // decoration: BoxDecoration(
+                          //     color: Colors.grey[200],
+                          //     borderRadius: BorderRadius.circular(20)),
+                          // width: 500,
+                          // height: 500,
                           child: Icon(
                             Icons.camera_alt,
                             color: Colors.redAccent[200],

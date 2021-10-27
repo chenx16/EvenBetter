@@ -12,6 +12,8 @@ class Post {
   });
 }
 
+//{"_id":"615ba175b3d4ff1e1c4c2a7d","title":"test","description":"","picture-uri":"","likes":0,"__v":0}
+
 final List<Post> posts = [
   Post(
     authorName: 'Sam Martin',
