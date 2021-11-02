@@ -11,8 +11,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.blue.shade300,
-        dividerColor: Colors.black,
+        primaryColor: Colors.pinkAccent[200],
+        dividerColor: Colors.pinkAccent[300],
       ),
       title: 'Even Better',
       home: FeedScreen(),

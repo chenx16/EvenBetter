@@ -17,13 +17,15 @@ class Post {
 final List<Post> posts = [
   Post(
     authorName: 'Sam Martin',
-    authorImageUrl: 'assets/images/user0.png',
+    authorImageUrl:
+        '/data/user/0/com.example.test/cache/image_picker6576687268720922497.jpg',
     timeAgo: '5 min',
     imageUrl: 'assets/images/post0.jpg',
   ),
   Post(
     authorName: 'Sam Martin',
-    authorImageUrl: 'assets/images/user0.png',
+    authorImageUrl:
+        '/data/user/0/com.example.test/cache/image_picker6576687268720922497.jpg',
     timeAgo: '10 min',
     imageUrl: 'assets/images/post1.jpg',
   ),

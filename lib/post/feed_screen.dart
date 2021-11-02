@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:even_better/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:even_better/models/post_model.dart';
@@ -14,6 +16,17 @@ class FeedScreen extends StatefulWidget {
 
 class _FeedScreenState extends State<FeedScreen> {
   bool _hasBeenPressed = false;
+
+  Image getImage(int index) {
+    String s = posts[index].authorImageUrl;
+    print(s);
+    return Image.file(
+      File(s),
+      width: 50.0,
+      height: 50.0,
+      fit: BoxFit.cover,
+    );
+  }
 
   Widget _buildPost(int index) {
     return Padding(
@@ -47,13 +60,16 @@ class _FeedScreenState extends State<FeedScreen> {
                       ),
                       child: CircleAvatar(
                         child: ClipOval(
-                          child: Image(
-                            height: 50.0,
-                            width: 50.0,
-                            image: AssetImage(posts[index].authorImageUrl),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                            child:
+
+                                //         Image.file(
+                                //   File(
+                                //       '/data/user/0/com.example.test/cache/image_picker6576687268720922497.jpg'),
+                                //   width: 50.0,
+                                //   height: 50.0,
+                                //   fit: BoxFit.cover,
+                                // )
+                                getImage(index)),
                       ),
                     ),
                     title: Text(

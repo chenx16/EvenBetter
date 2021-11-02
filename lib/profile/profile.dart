@@ -16,7 +16,14 @@ class ProfileAppState extends State<ProfileApp> {
   final picker = ImagePicker();
   bool _update = false;
   File _image;
-  SizedBox sb = _noupdateProfile();
+  String _company = ' ';
+  bool cs = true;
+  bool se = false;
+  bool ds = false;
+  String _name = 'Yolanda White';
+  String _bio = ' ';
+
+  // SizedBox sb = _noupdateProfile();
 
   ProfileAppState();
   void _showPicker(context) {
@@ -94,7 +101,6 @@ class ProfileAppState extends State<ProfileApp> {
                         const SizedBox(
                           height: 8.0,
                         ),
-
                         Center(
                           child: GestureDetector(
                             onTap: () {
@@ -130,8 +136,8 @@ class ProfileAppState extends State<ProfileApp> {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            const Text(
+                          children: const <Widget>[
+                            Text(
                               "Username: chenx16",
                               style: TextStyle(
                                 fontFamily: 'EB',
@@ -139,29 +145,29 @@ class ProfileAppState extends State<ProfileApp> {
                                 color: Colors.white,
                               ),
                             ),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.edit_rounded,
-                                color: Colors.white,
-                              ),
-                              onPressed: () => setState(() {
-                                sb = _updateProfile();
-                              }),
-                            ),
+                            // IconButton(
+                            //   icon: const Icon(
+                            //     Icons.edit_rounded,
+                            //     color: Colors.white,
+                            //   ),
+                            //   onPressed: () => setState(() {
+                            //      sb = _updateProfile();
+                            //   }),
+                            // ),
                           ],
                         ),
-                        // const SizedBox(
-                        //   height: 10.0,
-                        // ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
                         Card(
                           margin: EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 0.0),
+                              horizontal: 10.0, vertical: 0.0),
                           clipBehavior: Clip.antiAlias,
                           color: Colors.white,
                           elevation: 5.0,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 5.0),
+                                horizontal: 20.0, vertical: 8.0),
                             child: Row(
                               children: <Widget>[
                                 Expanded(
@@ -191,6 +197,7 @@ class ProfileAppState extends State<ProfileApp> {
                                   ),
                                 ),
                                 Expanded(
+                                  flex: 2,
                                   child: Column(
                                     children: <Widget>[
                                       Text(
@@ -243,6 +250,7 @@ class ProfileAppState extends State<ProfileApp> {
                                   ),
                                 ),
                                 Expanded(
+                                  flex: 2,
                                   child: Column(
                                     children: <Widget>[
                                       Text(
@@ -257,7 +265,7 @@ class ProfileAppState extends State<ProfileApp> {
                                         height: 2.0,
                                       ),
                                       Text(
-                                        "Google",
+                                        _company,
                                         style: TextStyle(
                                           fontFamily: 'EB',
                                           fontSize: 18.0,
@@ -283,134 +291,115 @@ class ProfileAppState extends State<ProfileApp> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    RichText(
-                      text: const TextSpan(
-                        // Note: Styles for TextSpans must be explicitly defined.
-                        // Child text spans will inherit styles from parent
+                    Row(children: <Widget>[
+                      Text(
+                        'Major(s): ',
                         style: TextStyle(
-                          fontSize: 14.0,
-                          color: Colors.black,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: 'Major: ',
-                            style: TextStyle(
-                                color: Colors.redAccent,
-                                fontFamily: 'EBI',
-                                fontSize: 20.0),
-                          ),
-                          TextSpan(
-                            text: 'Computer Science',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'EB',
-                              color: Colors.black87,
-                              letterSpacing: 1.0,
-                            ),
-                          ),
-                        ],
+                            color: Colors.redAccent,
+                            fontFamily: 'EBI',
+                            fontSize: 20.0),
                       ),
-                    ),
-                    RichText(
-                      text: const TextSpan(
-                        // Note: Styles for TextSpans must be explicitly defined.
-                        // Child text spans will inherit styles from parent
+                      Text(
+                        _major(),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'EB',
+                          color: Colors.black87,
+                          letterSpacing: 1.0,
+                        ),
+                      )
+                    ]),
+                    Row(children: <Widget>[
+                      Text(
+                        'Name: ',
                         style: TextStyle(
-                          fontSize: 14.0,
-                          color: Colors.black,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: 'Name: ',
-                            style: TextStyle(
-                                color: Colors.redAccent,
-                                fontFamily: 'EBI',
-                                fontSize: 20.0),
-                          ),
-                          TextSpan(
-                            text: 'Yolanda White',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'EB',
-                              color: Colors.black87,
-                              letterSpacing: 1.0,
-                            ),
-                          ),
-                        ],
+                            color: Colors.redAccent,
+                            fontFamily: 'EBI',
+                            fontSize: 20.0),
                       ),
-                    ),
-                    RichText(
-                      text: const TextSpan(
-                        // Note: Styles for TextSpans must be explicitly defined.
-                        // Child text spans will inherit styles from parent
+                      Text(
+                        _name,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'EB',
+                          color: Colors.black87,
+                          letterSpacing: 1.0,
+                        ),
+                      )
+                    ]),
+                    Row(children: <Widget>[
+                      Text(
+                        'Bio: ',
                         style: TextStyle(
-                          fontSize: 14.0,
-                          color: Colors.black,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: 'Bio: ',
-                            style: TextStyle(
-                                color: Colors.redAccent,
-                                fontFamily: 'EBI',
-                                fontSize: 20.0),
-                          ),
-                          TextSpan(
-                            text:
-                                'I have graduated from Rose-Hulman CS major for 10 years. If you need any mobile app for your company then contact me for more informations.',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'EB',
-                              color: Colors.black87,
-                              letterSpacing: 1.0,
-                            ),
-                          ),
-                        ],
+                            color: Colors.redAccent,
+                            fontFamily: 'EBI',
+                            fontSize: 20.0),
                       ),
-                    ),
+                      Text(
+                        _bio,
+                        // 'I have graduated from Rose-Hulman CS major for 10 years. If you need any mobile app for your company then contact me for more informations.'
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'EB',
+                          color: Colors.black87,
+                          letterSpacing: 1.0,
+                        ),
+                      )
+                    ]),
                   ],
                 ),
               ),
             ),
-            sb
-            //  SizedBox(
-            //           width: 200.00,
-            //           child: RaisedButton(
-            //               onPressed: () {},
-            //               shape: RoundedRectangleBorder(
-            //                   borderRadius: BorderRadius.circular(80.0)),
-            //               elevation: 0.0,
-            //               padding: const EdgeInsets.all(0.0),
-            //               child: Ink(
-            //                 decoration: BoxDecoration(
-            //                   gradient: LinearGradient(
-            //                       begin: Alignment.centerRight,
-            //                       end: Alignment.centerLeft,
-            //                       colors: [
-            //                         Colors.redAccent[100],
-            //                         Colors.pinkAccent[100]
-            //                       ]),
-            //                   borderRadius: BorderRadius.circular(30.0),
-            //                 ),
-            //                 child: Container(
-            //                   constraints: const BoxConstraints(
-            //                       maxWidth: 300.0, minHeight: 45.0),
-            //                   alignment: Alignment.center,
-            //                   child: const Text(
-            //                     "Update",
-            //                     style: TextStyle(
-            //                       fontFamily: 'EB',
-            //                       color: Colors.white,
-            //                       fontSize: 26.0,
-            //                     ),
-            //                   ),
-            //                 ),
-            //               )),
-            //         )
+            // sb
+            _updateProfile()
           ],
         ),
       ),
     );
+  }
+
+  String _major() {
+    String str = '';
+    if (cs) {
+      str = str + 'CS,';
+    }
+    if (se) {
+      str = str + 'SE,';
+    }
+    if (ds) {
+      str = str + 'DS,';
+    }
+    if (str != null && str.isNotEmpty) {
+      str = str.substring(0, str.length - 1);
+    }
+    return str;
+  }
+
+  void _awaitReturnValueFromSecondScreen(BuildContext context) async {
+    // start the SecondScreen and wait for it to finish with a result
+    final Prof _r = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProfileUpdate(
+            _company,
+            _name,
+            _bio,
+            cs,
+            se,
+            ds,
+          ),
+        ));
+
+    // after the SecondScreen result comes back update the Text widget with it
+    setState(() {
+      _company = _r.company;
+      _name = _r.name;
+      _bio = _r.bio;
+      cs = _r.cs;
+      se = _r.se;
+      ds = _r.ds;
+      _major();
+    });
   }
 
   _imgFromCamera() async {
@@ -433,11 +422,18 @@ class ProfileAppState extends State<ProfileApp> {
 
   Widget _updateProfile() {
     return SizedBox(
-      width: 200.00,
+      width: 150.00,
+      height: 45,
       child: RaisedButton(
-          onPressed: () => setState(() {
-                sb = _noupdateProfile();
-              }),
+          onPressed: () {
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (_) => ProfileUpdate(),
+            //   ),
+            // );
+            _awaitReturnValueFromSecondScreen(context);
+          },
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
           elevation: 0.0,
@@ -472,3 +468,43 @@ Widget _noupdateProfile() {
     width: 200.00,
   );
 }
+
+// class Prof {
+//   String company;
+//   String name;
+//   String bio;
+//   bool cs;
+//   bool se;
+//   bool ds;
+//   Prof(String company, String name, String bio, bool cs, bool se, bool ds) {
+//     this.company = company;
+//     this.name = name;
+//     this.bio = bio;
+//     this.cs = cs;
+//     this.se = se;
+//     this.ds = ds;
+//   }
+//   setCompany(String company) {
+//     this.company = company;
+//   }
+
+//   setName(String name) {
+//     this.name = name;
+//   }
+
+//   setBio(String bio) {
+//     this.bio = bio;
+//   }
+
+//   setCS(bool cs) {
+//     this.cs = cs;
+//   }
+
+//   setSE(bool se) {
+//     this.se = se;
+//   }
+
+//   setDS(bool ds) {
+//     this.ds = ds;
+//   }
+// }

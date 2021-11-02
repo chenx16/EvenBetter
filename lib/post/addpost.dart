@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:even_better/post/feed_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:even_better/screens/api.dart';
 import 'package:image_picker/image_picker.dart';
@@ -202,6 +203,7 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
                 onPressed: () {
                   createPost(titleController.text, postController.text,
                       _image.path, 0);
+                  Navigator.pop(context);
                 },
               ),
             ),
@@ -222,7 +224,11 @@ Widget _descriptionTile(TextEditingController titleController) {
       leading: Icon(Icons.edit),
       title: Text(
         'Post Title',
-        style: TextStyle(height: 2, color: Colors.grey[800], fontSize: 20.0),
+        style: TextStyle(
+            fontFamily: 'EB',
+            height: 2,
+            color: Colors.grey[800],
+            fontSize: 20.0),
       ),
       subtitle: TextField(
         controller: titleController,
@@ -258,8 +264,11 @@ Widget _contentTile(TextEditingController postController) {
           leading: Icon(Icons.edit),
           title: Text(
             'Post Content',
-            style:
-                TextStyle(height: 2, color: Colors.grey[800], fontSize: 20.0),
+            style: TextStyle(
+                fontFamily: 'EB',
+                height: 2,
+                color: Colors.grey[800],
+                fontSize: 20.0),
           ),
           subtitle: TextField(
             controller: postController,
