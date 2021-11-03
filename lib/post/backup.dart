@@ -17,12 +17,25 @@ class _FeedScreenState extends State<FeedScreen> {
   bool _hasBeenPressed = false;
   final String username = 'chenx16';
   Padding p = _noaddNewPost();
-
-  Image getAvatorImage() {
-    return Image(
-      height: 50.0,
+  // final String _profimage =
+  //     '/data/user/0/com.example.test/cache/image_picker5781012125438482470.jpg';
+  Image getImage(int index) {
+    String s = posts[index].authorImageUrl;
+    print(s);
+    return Image.file(
+      File(s),
       width: 50.0,
-      image: AssetImage(posts[0].authorImageUrl),
+      height: 50.0,
+      fit: BoxFit.cover,
+    );
+  }
+
+  Image getAvatorImage(String s) {
+    print(s);
+    return Image.file(
+      File(s),
+      width: 50.0,
+      height: 50.0,
       fit: BoxFit.cover,
     );
   }
@@ -32,26 +45,21 @@ class _FeedScreenState extends State<FeedScreen> {
     return FileImage(File(s));
   }
 
-  Widget _buildPost(String time, String image, String title, String content) {
+  Widget _buildPosts(int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: Container(
         width: double.infinity,
-        // height: 800.0,
-        constraints: const BoxConstraints(
-          maxHeight: double.infinity,
-        ),
+        height: 800.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(25.0),
         ),
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   ListTile(
                     leading: Container(
@@ -68,7 +76,161 @@ class _FeedScreenState extends State<FeedScreen> {
                         ],
                       ),
                       child: CircleAvatar(
-                        child: ClipOval(child: getAvatorImage()),
+                        child: ClipOval(
+                          child: Image(
+                            height: 50.0,
+                            width: 50.0,
+                            image: AssetImage(posts[index].authorImageUrl),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                    title: Text(
+                      posts[index].authorName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(posts[index].timeAgo),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.more_horiz),
+                      color: Colors.black,
+                      onPressed: () => print('More'),
+                    ),
+                  ),
+                  InkWell(
+                    onDoubleTap: () => print('Like post'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ViewPostScreen(
+                            post: posts[index],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(10.0),
+                      width: double.infinity,
+                      height: 400.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.0),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black45,
+                            offset: Offset(0, 5),
+                            blurRadius: 8.0,
+                          ),
+                        ],
+                        image: DecorationImage(
+                          image: AssetImage(posts[index].imageUrl),
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                IconButton(
+                                  icon: const Icon(Icons.favorite_border),
+                                  iconSize: 30.0,
+                                  onPressed: () => print('Like post'),
+                                ),
+                                const Text(
+                                  '2,515',
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 20.0,
+                              height: 200.0,
+                            ),
+                            Row(
+                              children: <Widget>[
+                                IconButton(
+                                  icon: const Icon(Icons.chat),
+                                  iconSize: 30.0,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => ViewPostScreen(
+                                          post: posts[index],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                const Text(
+                                  '350',
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPost(
+      String time, String image, String title, DescriptionTextWidget des) {
+    // Widget _buildPost(String time, String image, String title, String content) {
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+      child: Container(
+        width: double.infinity,
+        height: 800.0,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(25.0),
+        ),
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    leading: Container(
+                      width: 50.0,
+                      height: 50.0,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black45,
+                            offset: Offset(0, 2),
+                            blurRadius: 6.0,
+                          ),
+                        ],
+                      ),
+                      child: CircleAvatar(
+                        child: ClipOval(child: getAvatorImage(image)),
                       ),
                     ),
                     title: Text(
@@ -139,20 +301,24 @@ class _FeedScreenState extends State<FeedScreen> {
                                 ),
                               ],
                             ),
+                            const SizedBox(
+                              width: 8.0,
+                              height: 200.0,
+                            ),
                             Row(
                               children: <Widget>[
                                 IconButton(
                                   icon: const Icon(Icons.chat),
                                   iconSize: 30.0,
                                   onPressed: () {
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (_) => ViewPostScreen(
-                                    //       post: posts[0],
-                                    //     ),
-                                    //   ),
-                                    // );
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => ViewPostScreen(
+                                          post: posts[0],
+                                        ),
+                                      ),
+                                    );
                                   },
                                 ),
                                 const Text(
@@ -180,20 +346,9 @@ class _FeedScreenState extends State<FeedScreen> {
                           fontSize: 18.0),
                     ),
                   ),
-                  Container(
-                    width: 330,
-                    constraints: const BoxConstraints(
-                      maxHeight: double.infinity,
-                    ),
-                    child: Text(
-                      content,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontFamily: 'EBR',
-                          color: Colors.grey[800],
-                          fontSize: 18.0),
-                    ),
-                  ),
+                  des
+                  // DescriptionTextWidget(text: content),
+                  // contentWidget(content)
                 ],
               ),
             ),
@@ -201,6 +356,29 @@ class _FeedScreenState extends State<FeedScreen> {
         ),
       ),
     );
+  }
+
+  Widget _descriptionTile(String title, String content) {
+    return ListTileTheme(
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.circular(16),
+        // ),
+        child: ListTile(
+      tileColor: Colors.grey[200],
+      // leading: Icon(Icons.edit),
+      title: Text(
+        title,
+        style: TextStyle(
+            fontFamily: 'EB', color: Colors.grey[800], fontSize: 15.0),
+      ),
+      subtitle: Text(
+        content,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        softWrap: false,
+        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      ),
+    ));
   }
 
   int _index = 0;
@@ -267,8 +445,14 @@ class _FeedScreenState extends State<FeedScreen> {
                       MaterialPageRoute(
                           builder: (context) => ImageFromGalleryEx()));
                   setState(() {
-                    p = _buildPost(_post.timeAgo, _post.imageUrl, _post.title,
-                        _post.content);
+                    DescriptionTextWidget des =
+                        DescriptionTextWidget(text: _post.content);
+
+                    // DescriptionTextWidget des = contentWidget(_post.content);
+                    p = _buildPost(
+                        _post.timeAgo, _post.imageUrl, _post.title, des);
+                    // p = _buildPost(_post.timeAgo, _post.imageUrl, _post.title,
+                    //     _post.content);
                   });
                 },
                 child: const Icon(
@@ -335,63 +519,65 @@ class _FeedScreenState extends State<FeedScreen> {
           ),
         ),
         p,
+        _buildPosts(0),
+        _buildPosts(1),
       ],
     );
   }
 
-  Widget _contentWidget(String text, bool _flag) {
-    String firstHalf;
-    String secondHalf;
-    bool _flag = true;
+  // Widget contentWidget(String text) {
+  //   String firstHalf;
+  //   String secondHalf;
+  //   bool flag = true;
 
-    if (text.length > 52) {
-      firstHalf = text.substring(0, 52);
-      secondHalf = text.substring(52, text.length);
-    } else {
-      firstHalf = text;
-      secondHalf = "";
-    }
-    return Container(
-      width: 330,
-      child: secondHalf.isEmpty
-          ? Text(
-              firstHalf,
-              style: TextStyle(
-                  fontFamily: 'EBR', color: Colors.grey[800], fontSize: 18.0),
-            )
-          : Column(
-              children: <Widget>[
-                Text(
-                  _flag ? (firstHalf + "...") : (firstHalf + secondHalf),
-                  style: TextStyle(
-                      fontFamily: 'EBR',
-                      color: Colors.grey[800],
-                      fontSize: 18.0),
-                ),
-                InkWell(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        _flag ? "show more" : "show less",
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    setState(() {
-                      _flag = !_flag;
-                    });
-                  },
-                ),
-              ],
-            ),
-    );
-  }
+  //   if (text.length > 50) {
+  //     firstHalf = text.substring(0, 50);
+  //     secondHalf = text.substring(50, text.length);
+  //   } else {
+  //     firstHalf = text;
+  //     secondHalf = "";
+  //   }
+  //   return Container(
+  //     width: 330,
+  //     child: secondHalf.isEmpty
+  //         ? Text(
+  //             firstHalf,
+  //             style: TextStyle(
+  //                 fontFamily: 'EBR', color: Colors.grey[800], fontSize: 18.0),
+  //           )
+  //         : Column(
+  //             children: <Widget>[
+  //               Text(
+  //                 flag ? (firstHalf + "...") : (firstHalf + secondHalf),
+  //                 style: TextStyle(
+  //                     fontFamily: 'EBR',
+  //                     color: Colors.grey[800],
+  //                     fontSize: 17.0),
+  //               ),
+  //               InkWell(
+  //                 child: Row(
+  //                   mainAxisAlignment: MainAxisAlignment.end,
+  //                   children: <Widget>[
+  //                     Text(
+  //                       flag ? "show more" : "show less",
+  //                       style: TextStyle(color: Colors.red),
+  //                     ),
+  //                   ],
+  //                 ),
+  //                 onTap: () {
+  //                   setState(() {
+  //                     flag = !flag;
+  //                   });
+  //                 },
+  //               ),
+  //             ],
+  //           ),
+  //   );
+  // }
 }
 
 Widget _noaddNewPost() {
-  return Padding(
+  return const Padding(
     padding: EdgeInsets.all(16.0),
     child: Text('Hello World!'),
   );

@@ -87,8 +87,8 @@ class ProfileAppState extends State<ProfileApp> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                      Colors.pinkAccent[100],
-                      Colors.pinkAccent[200]
+                      Colors.redAccent[200],
+                      Colors.redAccent[100]
                     ])),
                 child: Container(
                   width: double.infinity,
@@ -108,7 +108,7 @@ class ProfileAppState extends State<ProfileApp> {
                             },
                             child: CircleAvatar(
                               radius: 55,
-                              backgroundColor: Colors.pink[300],
+                              backgroundColor: Colors.red[300],
                               child: _image != null
                                   ? ClipRRect(
                                       borderRadius: BorderRadius.circular(50),
@@ -443,7 +443,7 @@ class ProfileAppState extends State<ProfileApp> {
               gradient: LinearGradient(
                   begin: Alignment.centerRight,
                   end: Alignment.centerLeft,
-                  colors: [Colors.redAccent[100], Colors.pinkAccent[100]]),
+                  colors: [Colors.redAccent[200], Colors.redAccent[200]]),
               borderRadius: BorderRadius.circular(30.0),
             ),
             child: Container(
@@ -468,43 +468,3 @@ Widget _noupdateProfile() {
     width: 200.00,
   );
 }
-
-// class Prof {
-//   String company;
-//   String name;
-//   String bio;
-//   bool cs;
-//   bool se;
-//   bool ds;
-//   Prof(String company, String name, String bio, bool cs, bool se, bool ds) {
-//     this.company = company;
-//     this.name = name;
-//     this.bio = bio;
-//     this.cs = cs;
-//     this.se = se;
-//     this.ds = ds;
-//   }
-//   setCompany(String company) {
-//     this.company = company;
-//   }
-
-//   setName(String name) {
-//     this.name = name;
-//   }
-
-//   setBio(String bio) {
-//     this.bio = bio;
-//   }
-
-//   setCS(bool cs) {
-//     this.cs = cs;
-//   }
-
-//   setSE(bool se) {
-//     this.se = se;
-//   }
-
-//   setDS(bool ds) {
-//     this.ds = ds;
-//   }
-// }

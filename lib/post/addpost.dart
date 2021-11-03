@@ -3,6 +3,7 @@ import 'package:even_better/post/feed_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:even_better/screens/api.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class ImageFromGalleryEx extends StatefulWidget {
   @override
@@ -195,15 +196,29 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.white),
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.pink),
+                        MaterialStateProperty.all<Color>(Colors.red),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ))),
                 onPressed: () {
-                  createPost(titleController.text, postController.text,
-                      _image.path, 0);
-                  Navigator.pop(context);
+                  DateTime now = DateTime.now();
+                  String formattedDate =
+                      DateFormat('yyyy-MM-dd kk:mm').format(now);
+                  print(formattedDate);
+                  createPost(
+                      titleController.text.replaceAll('\n', ' '),
+                      postController.text.trim(),
+                      _image.path,
+                      0,
+                      formattedDate);
+                  Navigator.pop(
+                      context,
+                      NewPost(
+                          formattedDate,
+                          _image.path,
+                          titleController.text.replaceAll('\n', ' '),
+                          postController.text.trim()));
                 },
               ),
             ),
@@ -243,7 +258,7 @@ Widget _descriptionTile(TextEditingController titleController) {
         //keyboardType: TextInputType.multiline,
         minLines: 1,
         maxLines: 2,
-        maxLength: 150,
+        maxLength: 44,
       ),
     ),
   );
@@ -287,4 +302,13 @@ Widget _contentTile(TextEditingController postController) {
           ),
         ),
       ]);
+}
+
+class NewPost {
+  String timeAgo;
+  String imageUrl;
+  String title;
+  String content;
+
+  NewPost(this.timeAgo, this.imageUrl, this.title, this.content);
 }

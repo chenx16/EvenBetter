@@ -348,27 +348,4 @@ class Prof {
     this.se = se;
     this.ds = ds;
   }
-  setCompany(String company) {
-    this.company = company;
-  }
-
-  setName(String name) {
-    this.name = name;
-  }
-
-  setBio(String bio) {
-    this.bio = bio;
-  }
-
-  setCS(bool cs) {
-    this.cs = cs;
-  }
-
-  setSE(bool se) {
-    this.se = se;
-  }
-
-  setDS(bool ds) {
-    this.ds = ds;
-  }
 }

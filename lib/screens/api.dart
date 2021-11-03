@@ -6,12 +6,12 @@ import 'dart:io';
 //documentation: https://flutter.dev/docs/cookbook/networking/send-data
 //if we need to work with responses, add stuff from here ^
 
-void createPost(title, description, url, likes) {
-  _createPost(title, description, url, likes);
+void createPost(title, description, url, likes, time) {
+  _createPost(title, description, url, likes, time);
   print("post url ${url}");
 }
 
-Future<http.Response> _createPost(title, description, url, likes) {
+Future<http.Response> _createPost(title, description, url, likes, time) {
   print("Even better username: ");
   return http.post(
     Uri.parse(
@@ -25,7 +25,8 @@ Future<http.Response> _createPost(title, description, url, likes) {
       "description": description,
       "picture-uri": url,
       "likes": 0.toString(),
-      "__v": 0.toString()
+      "__v": 0.toString(),
+      "timestamp": time
     }),
   );
 }

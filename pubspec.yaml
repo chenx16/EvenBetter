@@ -18,6 +18,7 @@ dependencies:
   animated_theme_switcher:
   google_fonts: ^2.1.0
   url_launcher: ^6.0.12
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +50,12 @@ flutter:
           weight: 600
         - asset: assets/fonts/DancingScript-Bold.ttf
           weight: 700
+    - family: EBX
+      fonts:
+        - asset: assets/fonts/EBGaramond-Bold.ttf
+    - family: EBR
+      fonts:
+        - asset: assets/fonts/EBGaramond-Regular.ttf
     - family: EB
       fonts:
         - asset: assets/fonts/EBGaramond-ExtraBold.ttf
