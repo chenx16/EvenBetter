@@ -61,8 +61,8 @@ class ProfileUpdateState extends State<ProfileUpdate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           'Even Better',
@@ -79,60 +79,65 @@ class ProfileUpdateState extends State<ProfileUpdate> {
         brightness: Brightness.dark,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32, vertical: 10),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(),
-                child: Column(
-                  children: [
-                    SizedBox(height: 20),
-                    _companyTile(companyController),
-                    SizedBox(height: 30),
-                    _nameTile(
-                      nameController,
-                    ),
-                    SizedBox(height: 30),
-                    _bioTile(
-                      bioController,
-                    ),
-                    SizedBox(height: 30),
-                    _majorTile(),
-                  ],
+        reverse: true,
+        child: Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 32, vertical: 10),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20),
+                      _companyTile(companyController),
+                      SizedBox(height: 30),
+                      _nameTile(
+                        nameController,
+                      ),
+                      SizedBox(height: 30),
+                      _bioTile(
+                        bioController,
+                      ),
+                      SizedBox(height: 30),
+                      _majorTile(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Container(
-              width: 100.00,
-              margin: EdgeInsets.all(25),
-              child: TextButton(
-                child: Text(
-                  'Update',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontFamily: 'Festive',
-                      color: Colors.white,
-                      fontSize: 32.0),
+              Container(
+                width: 100.00,
+                margin: EdgeInsets.all(25),
+                child: TextButton(
+                  child: Text(
+                    'Update',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontFamily: 'Festive',
+                        color: Colors.white,
+                        fontSize: 32.0),
+                  ),
+                  style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.pink),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ))),
+                  onPressed: () {
+                    _sendDataBack(context);
+                  },
                 ),
-                style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.pink),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ))),
-                onPressed: () {
-                  _sendDataBack(context);
-                },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

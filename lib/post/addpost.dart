@@ -102,127 +102,132 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
         brightness: Brightness.dark,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 30,
-            ),
-            Center(
-              child: GestureDetector(
-                onTap: () {
-                  _showPicker(context);
-                },
-                child: CircleAvatar(
-                  radius: 150,
-                  backgroundColor: Colors.white,
-                  child: _image != null
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: Image.file(
-                            _image,
-                            width: 500,
-                            height: 500,
-                            fit: BoxFit.cover,
+        reverse: true,
+        child: Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 30,
+              ),
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    _showPicker(context);
+                  },
+                  child: CircleAvatar(
+                    radius: 150,
+                    backgroundColor: Colors.white,
+                    child: _image != null
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.file(
+                              _image,
+                              width: 500,
+                              height: 500,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        //   child: _image != null
+                        //       ? Image.file(_image, fit: BoxFit.cover)
+                        //       : Text('Please select an image'),
+                        // )
+                        : Container(
+                            margin: const EdgeInsets.only(
+                                left: 10, top: 10, right: 10, bottom: 10),
+                            height: double.infinity,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(50),
+                                  topRight: Radius.circular(50),
+                                  bottomLeft: Radius.circular(50),
+                                  bottomRight: Radius.circular(50)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: const Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            // decoration: BoxDecoration(
+                            //     color: Colors.grey[200],
+                            //     borderRadius: BorderRadius.circular(20)),
+                            // width: 500,
+                            // height: 500,
+                            child: Icon(
+                              Icons.camera_alt,
+                              color: Colors.redAccent[200],
+                            ),
                           ),
-                        )
-                      //   child: _image != null
-                      //       ? Image.file(_image, fit: BoxFit.cover)
-                      //       : Text('Please select an image'),
-                      // )
-                      : Container(
-                          margin: const EdgeInsets.only(
-                              left: 10, top: 10, right: 10, bottom: 10),
-                          height: double.infinity,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(50),
-                                topRight: Radius.circular(50),
-                                bottomLeft: Radius.circular(50),
-                                bottomRight: Radius.circular(50)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: const Offset(
-                                    0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          // decoration: BoxDecoration(
-                          //     color: Colors.grey[200],
-                          //     borderRadius: BorderRadius.circular(20)),
-                          // width: 500,
-                          // height: 500,
-                          child: Icon(
-                            Icons.camera_alt,
-                            color: Colors.redAccent[200],
-                          ),
-                        ),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32, vertical: 10),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(),
-                child: Column(
-                  children: [
-                    SizedBox(height: 20),
-                    _descriptionTile(titleController),
-                    SizedBox(height: 30),
-                    _contentTile(
-                      postController,
-                    )
-                  ],
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 32, vertical: 10),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20),
+                      _descriptionTile(titleController),
+                      SizedBox(height: 30),
+                      _contentTile(
+                        postController,
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Container(
-              width: 100.00,
-              margin: EdgeInsets.all(25),
-              child: TextButton(
-                child: Text(
-                  'Create',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontFamily: 'Festive',
-                      color: Colors.white,
-                      fontSize: 32.0),
+              Container(
+                width: 100.00,
+                margin: EdgeInsets.all(25),
+                child: TextButton(
+                  child: Text(
+                    'Create',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontFamily: 'Festive',
+                        color: Colors.white,
+                        fontSize: 32.0),
+                  ),
+                  style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.red),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ))),
+                  onPressed: () {
+                    DateTime now = DateTime.now();
+                    String formattedDate =
+                        DateFormat('yyyy-MM-dd kk:mm').format(now);
+                    print(formattedDate);
+                    createPost(
+                        titleController.text.replaceAll('\n', ' '),
+                        postController.text.trim(),
+                        _image.path,
+                        0,
+                        formattedDate);
+                    Navigator.pop(
+                        context,
+                        NewPost(
+                            formattedDate,
+                            _image.path,
+                            titleController.text.replaceAll('\n', ' '),
+                            postController.text.trim()));
+                  },
                 ),
-                style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.red),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ))),
-                onPressed: () {
-                  DateTime now = DateTime.now();
-                  String formattedDate =
-                      DateFormat('yyyy-MM-dd kk:mm').format(now);
-                  print(formattedDate);
-                  createPost(
-                      titleController.text.replaceAll('\n', ' '),
-                      postController.text.trim(),
-                      _image.path,
-                      0,
-                      formattedDate);
-                  Navigator.pop(
-                      context,
-                      NewPost(
-                          formattedDate,
-                          _image.path,
-                          titleController.text.replaceAll('\n', ' '),
-                          postController.text.trim()));
-                },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

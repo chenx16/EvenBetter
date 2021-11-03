@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:even_better/screens/my_flutter_app_icons.dart';
 import 'package:meta/meta.dart';
 import 'package:even_better/profile/profile.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,8 @@ class _FeedScreenState extends State<FeedScreen> {
   bool _hasBeenPressed = false;
   final String username = 'chenx16';
   Padding p = _noaddNewPost();
-
+  List<Padding> ps = <Padding>[];
+  Container l = _noaddNewPosts();
   Image getAvatorImage() {
     return Image(
       height: 50.0,
@@ -38,7 +40,7 @@ class _FeedScreenState extends State<FeedScreen> {
       child: Container(
         width: double.infinity,
         // height: 800.0,
-        constraints: const BoxConstraints(
+        constraints: BoxConstraints(
           maxHeight: double.infinity,
         ),
         decoration: BoxDecoration(
@@ -87,14 +89,14 @@ class _FeedScreenState extends State<FeedScreen> {
                   InkWell(
                     onDoubleTap: () => print('Like post'),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => ViewPostScreen(
-                            post: posts[0],
-                          ),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (_) => ViewPostScreen(
+                      //       post: posts[0],
+                      //     ),
+                      //   ),
+                      // );
                     },
                     child: Container(
                       margin: const EdgeInsets.all(10.0),
@@ -254,7 +256,7 @@ class _FeedScreenState extends State<FeedScreen> {
           ),
           BottomNavigationBarItem(
             icon: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+              padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
               child: FlatButton(
                 padding: EdgeInsets.symmetric(vertical: 10.0),
                 shape: RoundedRectangleBorder(
@@ -269,6 +271,8 @@ class _FeedScreenState extends State<FeedScreen> {
                   setState(() {
                     p = _buildPost(_post.timeAgo, _post.imageUrl, _post.title,
                         _post.content);
+                    ps.add(p);
+                    l = getPostWidgets();
                   });
                 },
                 child: const Icon(
@@ -282,7 +286,8 @@ class _FeedScreenState extends State<FeedScreen> {
           ),
           const BottomNavigationBarItem(
             icon: Icon(
-              Icons.favorite_border,
+              // MyFlutterApp.community,
+              Icons.people_outlined,
               size: 30.0,
               color: Colors.grey,
             ),
@@ -303,7 +308,7 @@ class _FeedScreenState extends State<FeedScreen> {
 
   Widget _postHome() {
     return ListView(
-      physics: const AlwaysScrollableScrollPhysics(),
+      physics: AlwaysScrollableScrollPhysics(),
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -334,9 +339,29 @@ class _FeedScreenState extends State<FeedScreen> {
             ],
           ),
         ),
-        p,
+        // p,
+        l,
+        // Container(
+        //   height: 200,
+        // ),
       ],
     );
+  }
+
+  Widget getPostWidgets() {
+    return Container(
+        width: double.infinity,
+        // height: double.infinity,
+        // height: MediaQuery.of(context).size.height * 1.20,
+        constraints: const BoxConstraints(
+          // minHeight: 800,
+          maxHeight: double.infinity,
+        ),
+        child: ListView(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            // physics: AlwaysScrollableScrollPhysics(),
+            children: ps.reversed.toList()));
   }
 
   Widget _contentWidget(String text, bool _flag) {
@@ -390,10 +415,46 @@ class _FeedScreenState extends State<FeedScreen> {
   }
 }
 
+Widget _noaddNewPosts() {
+  return Container(
+    height: 250,
+    child: Center(
+      child: Text(
+        'Create your first Post! :)',
+        style: TextStyle(
+          fontFamily: 'Billabong',
+          fontSize: 30.0,
+          color: Colors.red,
+        ),
+      ),
+    ),
+  );
+}
+
 Widget _noaddNewPost() {
   return Padding(
-    padding: EdgeInsets.all(16.0),
-    child: Text('Hello World!'),
+    padding: EdgeInsets.all(50.0),
+    child: Container(
+      width: double.infinity,
+      height: 100.0,
+      constraints: const BoxConstraints(
+        maxHeight: double.infinity,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: Center(
+        child: Text(
+          'Create your first Post! :)',
+          style: TextStyle(
+            fontFamily: 'Billabong',
+            fontSize: 30.0,
+            color: Colors.red,
+          ),
+        ),
+      ),
+    ),
   );
 }
 
