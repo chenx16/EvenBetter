@@ -8,7 +8,7 @@ import 'package:even_better/post/addpost.dart';
 import 'package:even_better/post/view_post_screen.dart';
 
 class FeedScreen extends StatefulWidget {
-  const FeedScreen({Key key}) : super(key: key);
+  const FeedScreen({Key? key}) : super(key: key);
 
   @override
   _FeedScreenState createState() => _FeedScreenState();
@@ -17,9 +17,9 @@ class FeedScreen extends StatefulWidget {
 class _FeedScreenState extends State<FeedScreen> {
   bool _hasBeenPressed = false;
   final String username = 'chenx16';
-  Padding p = _noaddNewPost();
-  List<Padding> ps = <Padding>[];
-  Container l = _noaddNewPosts();
+  Widget p = _noaddNewPost();
+  List<Widget> ps = <Widget>[];
+  Widget l = _noaddNewPosts();
   Image getAvatorImage() {
     return Image(
       height: 50.0,
@@ -456,74 +456,4 @@ Widget _noaddNewPost() {
       ),
     ),
   );
-}
-
-class DescriptionTextWidget extends StatefulWidget {
-  final String text;
-
-  DescriptionTextWidget({@required this.text});
-
-  @override
-  _DescriptionTextWidgetState createState() =>
-      new _DescriptionTextWidgetState();
-}
-
-class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
-  String firstHalf;
-  String secondHalf;
-
-  bool flag = true;
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (widget.text.length > 50) {
-      firstHalf = widget.text.substring(0, 50);
-      secondHalf = widget.text.substring(50, widget.text.length);
-    } else {
-      firstHalf = widget.text;
-      secondHalf = "";
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 330,
-      child: secondHalf.isEmpty
-          ? Text(
-              firstHalf,
-              style: TextStyle(
-                  fontFamily: 'EBR', color: Colors.grey[800], fontSize: 18.0),
-            )
-          : Column(
-              children: <Widget>[
-                Text(
-                  flag ? (firstHalf + "...") : (firstHalf + secondHalf),
-                  style: TextStyle(
-                      fontFamily: 'EBR',
-                      color: Colors.grey[800],
-                      fontSize: 17.0),
-                ),
-                InkWell(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        flag ? "show more" : "show less",
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    setState(() {
-                      flag = !flag;
-                    });
-                  },
-                ),
-              ],
-            ),
-    );
-  }
 }

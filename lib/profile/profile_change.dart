@@ -153,7 +153,7 @@ class ProfileUpdateState extends State<ProfileUpdate> {
       value: cs,
       onChanged: (newValue) {
         setState(() {
-          cs = newValue;
+          cs = newValue!;
         });
       },
       controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
@@ -171,7 +171,7 @@ class ProfileUpdateState extends State<ProfileUpdate> {
       value: se,
       onChanged: (newValue) {
         setState(() {
-          se = newValue;
+          se = newValue!;
         });
       },
       controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
@@ -189,7 +189,7 @@ class ProfileUpdateState extends State<ProfileUpdate> {
       value: ds,
       onChanged: (newValue) {
         setState(() {
-          ds = newValue;
+          ds = newValue!;
         });
       },
       controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
@@ -339,18 +339,11 @@ Widget _bioTile(TextEditingController bioController) {
 }
 
 class Prof {
-  String company;
-  String name;
-  String bio;
-  bool cs;
-  bool se;
-  bool ds;
-  Prof(String company, String name, String bio, bool cs, bool se, bool ds) {
-    this.company = company;
-    this.name = name;
-    this.bio = bio;
-    this.cs = cs;
-    this.se = se;
-    this.ds = ds;
-  }
+  String? company;
+  String? name;
+  String? bio;
+  bool? cs;
+  bool? se;
+  bool? ds;
+  Prof(this.company, this.name, this.bio, this.cs, this.se, this.ds);
 }

@@ -16,7 +16,7 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController postController = TextEditingController();
   final picker = ImagePicker();
-  File _image;
+  File? _image;
 
   ImageFromGalleryExState();
 
@@ -123,7 +123,7 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(50),
                             child: Image.file(
-                              _image,
+                              _image!,
                               width: 500,
                               height: 500,
                               fit: BoxFit.cover,
@@ -213,14 +213,14 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
                     createPost(
                         titleController.text.replaceAll('\n', ' '),
                         postController.text.trim(),
-                        _image.path,
+                        _image!.path,
                         0,
                         formattedDate);
                     Navigator.pop(
                         context,
                         NewPost(
                             formattedDate,
-                            _image.path,
+                            _image!.path,
                             titleController.text.replaceAll('\n', ' '),
                             postController.text.trim()));
                   },

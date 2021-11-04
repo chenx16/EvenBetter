@@ -23,8 +23,8 @@ class MyFlutterApp {
   MyFlutterApp._();
 
   static const _kFontFam = 'MyFlutterApp';
-  static const String _kFontPkg = null;
+  static const String? _kFontPkg = null;
 
-  static const IconData community =
+  static const IconData double_team =
       IconData(0xe99e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

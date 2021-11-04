@@ -15,7 +15,7 @@ class ProfileAppState extends State<ProfileApp> {
   final TextEditingController postController = TextEditingController();
   final picker = ImagePicker();
   bool _update = false;
-  File _image;
+  File? _image;
   String _company = ' ';
   bool cs = true;
   bool se = false;
@@ -84,12 +84,10 @@ class ProfileAppState extends State<ProfileApp> {
                 height: 250.0,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                      Colors.redAccent[200],
-                      Colors.redAccent[100]
-                    ])),
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[Color(0xffee0000), Color(0xffeeee00)],
+                )),
                 child: Container(
                   width: double.infinity,
                   height: 200.0,
@@ -113,7 +111,7 @@ class ProfileAppState extends State<ProfileApp> {
                                   ? ClipRRect(
                                       borderRadius: BorderRadius.circular(50),
                                       child: Image.file(
-                                        _image,
+                                        _image!,
                                         width: 100,
                                         height: 100,
                                         fit: BoxFit.cover,
@@ -392,12 +390,12 @@ class ProfileAppState extends State<ProfileApp> {
 
     // after the SecondScreen result comes back update the Text widget with it
     setState(() {
-      _company = _r.company;
-      _name = _r.name;
-      _bio = _r.bio;
-      cs = _r.cs;
-      se = _r.se;
-      ds = _r.ds;
+      _company = _r.company!;
+      _name = _r.name!;
+      _bio = _r.bio!;
+      cs = _r.cs!;
+      se = _r.se!;
+      ds = _r.ds!;
       _major();
     });
   }
@@ -443,7 +441,7 @@ class ProfileAppState extends State<ProfileApp> {
               gradient: LinearGradient(
                   begin: Alignment.centerRight,
                   end: Alignment.centerLeft,
-                  colors: [Colors.redAccent[200], Colors.redAccent[200]]),
+                  colors: <Color>[Color(0xffee0000), Color(0xffeeee00)]),
               borderRadius: BorderRadius.circular(30.0),
             ),
             child: Container(

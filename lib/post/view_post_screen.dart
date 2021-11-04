@@ -6,7 +6,7 @@ import 'package:even_better/screens/api.dart';
 class ViewPostScreen extends StatefulWidget {
   final Post post;
 
-  ViewPostScreen({this.post});
+  ViewPostScreen({required this.post});
 
   @override
   _ViewPostScreenState createState() => _ViewPostScreenState();

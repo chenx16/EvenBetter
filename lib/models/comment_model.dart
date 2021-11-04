@@ -4,9 +4,9 @@ class Comment {
   String text;
 
   Comment({
-    this.authorName,
-    this.authorImageUrl,
-    this.text,
+    required this.authorName,
+    required this.authorImageUrl,
+    required this.text,
   });
 }
 
